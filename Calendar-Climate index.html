@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقويم عبدالرحمن فرغل</title>
+<style>
+body{background:#08140f;margin:0;padding:15px;font-family:serif;display:flex;flex-direction:column;align-items:center}
+.box{background:#fff8e1;padding:15px;border-radius:12px;border:2px solid #b8964f;width:800px;max-width:95vw;text-align:center;margin-bottom:15px}
+.box input{font-size:26px;width:160px;text-align:center;padding:8px;border:3px solid #8a6d2a;border-radius:8px;font-weight:bold}
+.btn{background:#0f2a1a;color:#f0d27a;border:2px solid #8a6d2a;padding:8px 18px;border-radius:6px;cursor:pointer;margin:4px;font-weight:bold}
+.poster{width:800px;max-width:95vw;background:#0e2518;border:10px double #c9a86a;padding:30px 22px;color:#e8d9a5}
+.aya{text-align:center;font-size:28px;color:#f3d989;font-weight:bold}
+.note{border:1px solid #c9a86a;padding:8px;margin:12px 0;text-align:center;font-size:10px;color:#d1c29a;background:rgba(0,0,0,.3)}
+.title{text-align:center;font-size:48px;color:#f0d27a;margin:10px 0 0;font-weight:bold}
+.sub{text-align:center;font-size:10px;color:#a99a7a;margin-bottom:10px}
+.todayBox{background:rgba(201,168,106,.2);border:2px solid #c9a86a;border-radius:10px;padding:10px;text-align:center;color:#ffe9a0;font-weight:bold;line-height:2;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;border:2px solid #c9a86a}
+th{background:#c9a86a;color:#1a2a12;padding:8px;border:1px solid #7a5d2e}
+td{border:1px solid #5a4a2a;padding:6px;text-align:center;color:#e0d0a0}
+@media print{.box{display:none} @page{size:A4;margin:10mm}}
+.convBox{background:#fff8e1;padding:18px;border-radius:12px;border:2px solid #b8964f;width:800px;max-width:95vw;text-align:center;margin-top:18px}
+.convBox h3{margin:0 0 12px;color:#5a4210}
+.convRow{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:10px}
+.convRow select,.convRow input{font-size:18px;padding:6px;border:2px solid #8a6d2a;border-radius:6px;text-align:center}
+.convRow input[type=number]{width:70px}
+.convResult{margin-top:10px;font-size:18px;font-weight:bold;color:#0f2a1a;min-height:26px}
+</style>
+</head>
+<body>
+<div class="box">
+<label style="font-weight:bold">📅 ادخل السنه المطلوبه:</label><br>
+<input type="number" id="yearInput" value="2026" oninput="generate()"><br><br>
+<button class="btn" onclick="generate()">عرض التقويم</button>
+<button class="btn" onclick="window.print()">🖨️ طباعة</button>
+</div>
+<div class="poster">
+<div class="aya">يَسْأَلُونَكَ عَنِ الأَهِلَّةِ قُلْ هِيَ مَوَاقِيتُ لِلنَّاسِ وَالْحَجِّ<br><small style="font-size:14px;color:#c9b896">[ البقرة 189 ]</small></div>
+<div class="note">ملاحظة - رصد هلال المملكة العربية السعودية: يعتمد في تحديد بدايات الأشهر الهجرية على ما يصدر رسمياً من المحكمة العليا</div>
+<div class="title" id="mainTitle">تقويم 2026</div>
+<div id="todayBox" class="todayBox"></div>
+<table><thead><tr><th>التقويم الهجري</th><th>المناخ المتوقع (السعودية)</th><th>الشهر الميلادي</th></tr></thead><tbody id="tableBody"></tbody></table>
+</div>
+
+<div class="convBox">
+<h3>🔄 محوّل التاريخ (هجري ⇄ ميلادي)</h3>
+
+<div class="convRow">
+<label style="font-weight:bold">من ميلادي إلى هجري:</label>
+</div>
+<div class="convRow">
+<input type="number" id="gYear" placeholder="سنة" min="1900" max="2100">
+<select id="gMonth"></select>
+<input type="number" id="gDay" placeholder="يوم" min="1" max="31">
+<button class="btn" onclick="gregToHijri()">تحويل</button>
+</div>
+<div class="convResult" id="gResult"></div>
+
+<hr style="margin:16px 0;border:1px solid #c9a86a">
+
+<div class="convRow">
+<label style="font-weight:bold">من هجري إلى ميلادي:</label>
+</div>
+<div class="convRow">
+<input type="number" id="hYear" placeholder="سنة" min="1300" max="1600">
+<select id="hMonth"></select>
+<input type="number" id="hDay" placeholder="يوم" min="1" max="30">
+<button class="btn" onclick="hijriToGreg()">تحويل</button>
+</div>
+<div class="convResult" id="hResult"></div>
+</div>
+
+<script>
+const manakh=["بارد وممطر، أمطار متفرقة على الشمالية والوسطى","بارد إلى معتدل، أجواء جافة ومستقرة","معتدل وربيعي، أجواء لطيفة","معتدل نهاراً مع بداية ارتفاع الحرارة","حار نسبياً، حار جاف","حار وجاف، صيف ابتدائي","حار جداً، صيف شديد الحرارة","حار جداً، رطوبة عالية على السواحل","حار نسبياً مع بداية انخفاض الحرارة","دافئ معتدل صباحاً مناسب","معتدل، طقس لطيف وبارد","بارد ومعتدل، أمطار محتملة"];
+const months=["1 - يناير","2 - فبراير","3 - مارس","4 - أبريل","5 - مايو","6 - يونيو","7 - يوليو","8 - أغسطس","9 - سبتمبر","10 - أكتوبر","11 - نوفمبر","12 - ديسمبر"];
+const hLabels=["جمادى الآخرة - رجب","رجب - شعبان","شعبان - رمضان","رمضان - شوال","شوال - ذو القعدة","ذو القعدة - ذو الحجة","ذو الحجة - محرم","محرم - صفر","صفر - ربيع الأول","ربيع الأول - ربيع الآخر","ربيع الآخر - جمادى الأولى","جمادى الأولى - جمادى الآخرة"];
+function generate(){
+let y=parseInt(document.getElementById('yearInput').value)||2026;
+document.getElementById('mainTitle').innerText="تقويم "+y;
+let tb=document.getElementById('tableBody'); tb.innerHTML="";
+let base=1447+(y-2026);
+let now=new Date();
+let g=now.toLocaleDateString('en-GB',{timeZone:'Asia/Riyadh'});
+let h="";
+try{h=new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{timeZone:'Asia/Riyadh',year:'numeric',month:'long',day:'numeric'}).format(now);}catch(e){h="18 ربيع الأول 1448";}
+let gAr=now.toLocaleDateString('ar-EG',{timeZone:'Asia/Riyadh',weekday:'long',year:'numeric',month:'long',day:'numeric'});
+document.getElementById('todayBox').innerHTML="اليوم الميلادي: "+gAr+" م - "+g+"<br> اليوم الهجري: "+h;
+for(let i=0;i<12;i++){let hy=base+(i>=6?1:0); tb.innerHTML+="<tr><td>"+hy+" "+hLabels[i]+"</td><td>"+manakh[i]+"</td><td>"+months[i]+" "+y+"</td></tr>";}
+}
+generate();
+
+// ---------- محوّل التاريخ ----------
+const gMonthNames=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+const hMonthNames=["محرم","صفر","ربيع الأول","ربيع الآخر","جمادى الأولى","جمادى الآخرة","رجب","شعبان","رمضان","شوال","ذو القعدة","ذو الحجة"];
+
+(function fillMonthSelects(){
+  let gSel=document.getElementById('gMonth');
+  let hSel=document.getElementById('hMonth');
+  gMonthNames.forEach((m,i)=>{ gSel.innerHTML+=`<option value="${i+1}">${i+1} - ${m}</option>`; });
+  hMonthNames.forEach((m,i)=>{ hSel.innerHTML+=`<option value="${i+1}">${i+1} - ${m}</option>`; });
+})();
+
+function hijriPartsOf(date){
+  let f=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{year:'numeric',month:'numeric',day:'numeric'});
+  let parts=f.formatToParts(date);
+  let o={};
+  parts.forEach(p=>{ if(p.type==='year'||p.type==='month'||p.type==='day') o[p.type]=parseInt(p.value); });
+  return o; // {year, month, day} هجري
+}
+
+function gregToHijri(){
+  let y=parseInt(document.getElementById('gYear').value);
+  let m=parseInt(document.getElementById('gMonth').value)||1;
+  let d=parseInt(document.getElementById('gDay').value)||1;
+  let res=document.getElementById('gResult');
+  if(!y){ res.innerText="من فضلك أدخل السنة الميلادية"; return; }
+  let date=new Date(Date.UTC(y,m-1,d,12,0,0));
+  if(isNaN(date.getTime())){ res.innerText="تاريخ غير صحيح"; return; }
+  let hp=hijriPartsOf(date);
+  res.innerHTML=`${d} ${gMonthNames[m-1]} ${y}م = <br> ${hp.day} ${hMonthNames[hp.month-1]} ${hp.year}هـ`;
+}
+
+// نبحث عن التاريخ الميلادي المطابق لتاريخ هجري معيّن عبر مسح تقريبي ثم تدقيق يومي
+function hijriToGreg(){
+  let hy=parseInt(document.getElementById('hYear').value);
+  let hm=parseInt(document.getElementById('hMonth').value)||1;
+  let hd=parseInt(document.getElementById('hDay').value)||1;
+  let res=document.getElementById('hResult');
+  if(!hy){ res.innerText="من فضلك أدخل السنة الهجرية"; return; }
+
+  // تقدير أولي: السنة الهجرية أقصر من الميلادية بمعدل ~354.37 يوم
+  let approxGregYear = Math.round(hy * 0.9702 + 621.5);
+  let guess=new Date(Date.UTC(approxGregYear,0,1,12,0,0));
+
+  // ابحث للخلف وللأمام يوماً بيوم حتى نطابق السنة/الشهر/اليوم الهجري (ضمن نطاق سنتين احتياطاً)
+  let found=null;
+  for(let offset=-400; offset<=400; offset++){
+    let d=new Date(guess.getTime());
+    d.setUTCDate(d.getUTCDate()+offset);
+    let hp=hijriPartsOf(d);
+    if(hp.year===hy && hp.month===hm && hp.day===hd){ found=d; break; }
+  }
+
+  if(!found){ res.innerText="تعذّر إيجاد تاريخ مطابق، تأكد من صحة الأرقام المدخلة"; return; }
+
+  let gy=found.getUTCFullYear(), gm=found.getUTCMonth(), gd=found.getUTCDate();
+  res.innerHTML=`${hd} ${hMonthNames[hm-1]} ${hy}هـ = <br> ${gd} ${gMonthNames[gm]} ${gy}م`;
+}
+</script>
+
+</body>
+</html>
