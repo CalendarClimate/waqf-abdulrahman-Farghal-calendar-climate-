@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -18,7 +19,7 @@ body{background:#08140f;margin:0;padding:15px;font-family:serif;display:flex;fle
 table{width:100%;border-collapse:collapse;border:2px solid #c9a86a}
 th{background:#c9a86a;color:#1a2a12;padding:8px;border:1px solid #7a5d2e}
 td{border:1px solid #5a4a2a;padding:6px;text-align:center;color:#e0d0a0}
-@media print{.box{display:none}}
+@media print{.box{display:none} @page{size:A4;margin:10mm}}
 .convBox{background:#fff8e1;padding:18px;border-radius:12px;border:2px solid #b8964f;width:800px;max-width:95vw;text-align:center;margin-top:18px}
 .convBox h3{margin:0 0 12px;color:#5a4210}
 .convRow{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:10px}
@@ -32,13 +33,12 @@ td{border:1px solid #5a4a2a;padding:6px;text-align:center;color:#e0d0a0}
 <label style="font-weight:bold">📅 ادخل السنه المطلوبه:</label><br>
 <input type="number" id="yearInput" value="2026" oninput="generate()"><br><br>
 <button class="btn" onclick="generate()">عرض التقويم</button>
-<button class="btn" onclick="window.print()">🖨️ طباعة A3</button>
+<button class="btn" onclick="window.print()">🖨️ طباعة</button>
 </div>
 <div class="poster">
 <div class="aya">يَسْأَلُونَكَ عَنِ الأَهِلَّةِ قُلْ هِيَ مَوَاقِيتُ لِلنَّاسِ وَالْحَجِّ<br><small style="font-size:14px;color:#c9b896">[ البقرة 189 ]</small></div>
 <div class="note">ملاحظة - رصد هلال المملكة العربية السعودية: يعتمد في تحديد بدايات الأشهر الهجرية على ما يصدر رسمياً من المحكمة العليا</div>
 <div class="title" id="mainTitle">تقويم 2026</div>
-<div class="sub">TAQWEEM 2026 • ISLAMIC & GREGORIAN • KSA TIME</div>
 <div id="todayBox" class="todayBox"></div>
 <table><thead><tr><th>التقويم الهجري</th><th>المناخ المتوقع (السعودية)</th><th>الشهر الميلادي</th></tr></thead><tbody id="tableBody"></tbody></table>
 </div>
@@ -148,5 +148,6 @@ function hijriToGreg(){
   res.innerHTML=`${hd} ${hMonthNames[hm-1]} ${hy}هـ = <br> ${gd} ${gMonthNames[gm]} ${gy}م`;
 }
 </script>
+
 </body>
 </html>
