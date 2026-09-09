@@ -6,75 +6,67 @@
 <title>تقويم ومناخ عبدالرحمن فرغل - وقف لله تعالى</title>
 <style>
 *{box-sizing:border-box}
-body{background:#08140f; margin:0; padding:15px; font-family:'Traditional Arabic','Amiri','Times New Roman',serif; display:flex; flex-direction:column; align-items:center;}
-.controls{background:#fff8e1; padding:12px 20px; border-radius:10px; margin-bottom:15px; display:flex; gap:10px; align-items:center; border:2px solid #b8964f; width:800px; max-width:95vw; justify-content:center; flex-wrap:wrap;}
-.controls input{font-size:24px; padding:6px 10px; width:140px; text-align:center; border:2px solid #8a6d2a; border-radius:6px; font-weight:bold;}
-.controls button{background:#0f2a1a; color:#f0d27a; border:2px solid #8a6d2a; padding:8px 18px; font-size:16px; border-radius:6px; cursor:pointer; font-weight:bold;}
-.poster{width:800px; max-width:95vw; background:#0e2518; border:10px double #c9a86a; outline:3px solid #7a5d2e; outline-offset:-10px; padding:30px 28px 18px 28px; position:relative; color:#e8d9a5; box-shadow:0 0 25px rgba(0,0,0,0.9);}
-.aya{text-align:center; font-size:26px; color:#f3d989; line-height:1.7; font-weight:bold;}
-.aya small{display:block; font-size:15px; color:#c9b896;}
-.notice{border:1px solid #c9a86a; padding:9px 10px; font-size:10.5px; line-height:1.5; color:#d1c29a; text-align:center; margin:14px 8px; background:rgba(0,0,0,0.35);}
-.title{text-align:center; font-size:44px; color:#f0d27a; margin:14px 0 0 0; font-weight:bold;}
-.subtitle{text-align:center; font-size:10px; color:#a99a7a; letter-spacing:2px; margin-bottom:8px;}
-.today-box{text-align:center; background:linear-gradient(90deg, rgba(201,168,106,0.2), rgba(201,168,106,0.05)); border:1px solid #c9a86a; margin:0 20px 12px 20px; padding:8px 10px; font-size:14px; color:#ffe9a0; font-weight:bold; border-radius:8px; line-height:1.6;}
-table{width:100%; border-collapse:collapse; border:2px solid #c9a86a; font-size:12.5px;}
-th{background:#c9a86a; color:#1a2a12; padding:7px 4px; font-weight:bold; border:1px solid #7a5d2e;}
-td{border:1px solid #5a4a2a; padding:5px 6px; color:#e0d0a0; text-align:center;}
-tr:nth-child(even) td{background:rgba(0,0,0,0.25);}
-.footer{display:flex; justify-content:space-between; margin-top:14px; font-size:9.5px; color:#8a7d5a; line-height:1.4;}
-@media print{.controls{display:none} body{background:#fff; padding:0}.poster{box-shadow:none}}
+body{background:#0a1a0f;margin:0;padding:12px;font-family:'Traditional Arabic','Amiri',serif;display:flex;flex-direction:column;align-items:center}
+.top{background:#fff8e1;border:3px solid #b8964f;border-radius:14px;padding:12px;width:820px;max-width:96vw;display:flex;flex-direction:column;align-items:center;gap:10px}
+.row1{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.row1 label{font-size:15px;font-weight:bold;color:#3a2a0a}
+.row1 input{font-size:26px;font-weight:bold;width:160px;text-align:center;padding:8px;border:3px solid #8a6d2a;border-radius:10px;background:#fff}
+.btn{background:#0f2a1a;color:#f0d27a;border:2px solid #c9a86a;padding:9px 20px;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer}
+.poster{margin-top:14px;width:820px;max-width:96vw;background:#0e2518;border:10px double #c9a86a;outline:3px solid #7a5d2e;outline-offset:-10px;padding:26px 22px 16px;color:#e8d9a5}
+.aya{text-align:center;font-size:28px;color:#f3d989;line-height:1.6;font-weight:bold}
+.aya small{display:block;font-size:15px;color:#c9b896;margin-top:4px}
+.note{border:1px solid #c9a86a;padding:8px;margin:14px 6px;text-align:center;font-size:10.5px;color:#d1c29a;background:rgba(0,0,0,.35);line-height:1.6}
+.title{text-align:center;font-size:48px;color:#f0d27a;margin:12px 0 2px;font-weight:bold}
+.sub{text-align:center;font-size:10px;color:#a99a7a;letter-spacing:2px;margin-bottom:10px}
+.todayBox{border:2px solid #c9a86a;border-radius:10px;background:linear-gradient(90deg,rgba(201,168,106,.22),rgba(201,168,106,.07));padding:10px 12px;text-align:center;font-size:14px;font-weight:bold;color:#ffe9a0;line-height:1.8;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;border:2px solid #c9a86a;font-size:12.5px}
+th{background:#c9a86a;color:#1a2a12;padding:8px 4px;border:1px solid #7a5d2e}
+td{border:1px solid #5a4a2a;padding:6px;color:#e0d0a0;text-align:center}
+tr:nth-child(even) td{background:rgba(0,0,0,.25)}
+@media print{.top{display:none}body{background:#fff;padding:0}.poster{box-shadow:none;border:none;outline:none}}
 </style>
 </head>
 <body>
-<div class="controls">
-  <span style="font-weight:bold;">📅 السنة:</span>
-  <input type="number" id="yearInput" value="2026" min="1900" max="2100" oninput="generate()">
-  <button onclick="generate()">عرض</button>
-  <button onclick="window.print()">🖨️ طباعة A3</button>
+<div class="top">
+  <div class="row1">
+    <label for="yearInput">📅 ادخل السنه المطلوبه:</label>
+    <input type="number" id="yearInput" value="2026" min="1900" max="2100" oninput="generate()">
+    <button class="btn" onclick="generate()">عرض</button>
+  </div>
+  <button class="btn" onclick="window.print()">🖨️ طباعة A3</button>
 </div>
 
 <div class="poster">
   <div class="aya">يَسْأَلُونَكَ عَنِ الأَهِلَّةِ قُلْ هِيَ مَوَاقِيتُ لِلنَّاسِ وَالْحَجِّ<small>[ البقرة 189 ]</small></div>
-  <div class="notice"><b>ملاحظة - رصد هلال المملكة العربية السعودية:</b><br>يعتمد في استمداد بدايات الأشهر الهجرية فيما يصدر رسمياً من المحكمة العليا على تحري رؤية الهلال.</div>
+  <div class="note"><b>ملاحظة - رصد هلال المملكة العربية السعودية:</b><br>يعتمد في استمداد بدايات الأشهر الهجرية فيما يصدر رسمياً من المحكمة العليا على تحري رؤية الهلال</div>
   <div class="title" id="mainTitle">تقويم 2026</div>
-  <div class="subtitle">TAQWEEM <span id="subYear">2026</span> • ISLAMIC & GREGORIAN CALENDAR</div>
-  <div id="todayDate" class="today-box">📅 جاري تحميل تاريخ اليوم...</div>
-  <table><thead><tr><th>التقويم الهجري</th><th>المناخ المتوقع (السعودية)</th><th>الشهر</th></tr></thead><tbody id="tableBody"></tbody></table>
-  <div class="footer">
-    <div>وقف لله تعالى<br>تقويم ومناخ عبدالرحمن فرغل<br><span id="footerYear">2026</span></div>
-    <div style="text-align:left; direction:ltr;">وقف للتقويم: عبدالرحمن فرغل - تحويل التاريخ من الميلادي إلى الهجري<br>يعمل بدون نت - Offline ©</div>
-  </div>
+  <div class="sub">TAQWEEM <span id="subYear">2026</span> • ISLAMIC & GREGORIAN CALENDAR</div>
+  <div id="todayBox" class="todayBox">جاري تحميل تاريخ اليوم...</div>
+  <table><thead><tr><th>التقويم الهجري</th><th>المناخ المتوقع (السعودية)</th><th>الشهر</th></tr></thead><tbody id="bodyTable"></tbody></table>
+  <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:9px;color:#8a7d5a"><div>وقف لله تعالى - تقويم ومناخ عبدالرحمن فرغل</div><div id="footYear">2026 - Asia/Riyadh</div></div>
 </div>
 
 <script>
 const manakh=["بارد وممطر، أمطار متفرقة على الشمالية والوسطى","بارد إلى معتدل، أجواء جافة ومستقرة","معتدل وربيعي، أجواء لطيفة","معتدل نهاراً مع بداية ارتفاع الحرارة","حار نسبياً، حار جاف","حار وجاف، صيف ابتدائي","حار جداً، صيف شديد الحرارة","حار جداً، رطوبة عالية على السواحل","حار نسبياً مع بداية انخفاض الحرارة","دافئ معتدل صباحاً مناسب","معتدل، طقس لطيف وبارد","بارد ومعتدل، أمطار محتملة"];
-const monthsAr=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+const months=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
 const hLabels=["جمادى الآخرة - رجب","رجب - شعبان","شعبان - رمضان","رمضان - شوال","شوال - ذو القعدة","ذو القعدة - ذو الحجة","ذو الحجة - محرم","محرم - صفر","صفر - ربيع الأول","ربيع الأول - ربيع الآخر","ربيع الآخر - جمادى الأولى","جمادى الأولى - جمادى الآخرة"];
+
 function showToday(){
   let now=new Date();
-  let gDate=now.toLocaleDateString('ar-SA',{weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  // توقيت السعودية الثابت
+  let gWeek = now.toLocaleDateString('ar-SA',{timeZone:'Asia/Riyadh',weekday:'long',calendar:'gregory'});
+  let gFull = now.toLocaleDateString('ar-SA',{timeZone:'Asia/Riyadh',year:'numeric',month:'long',day:'numeric',calendar:'gregory'});
+  let gNum = now.toLocaleDateString('en-GB',{timeZone:'Asia/Riyadh'}); // 09/09/2026
+  
   let hDate="";
-  try{ hDate=now.toLocaleDateString('ar-SA-u-ca-islamic-umalqura',{year:'numeric', month:'long', day:'numeric'}); }
-  catch(e){ hDate=now.toLocaleDateString('ar-SA-islamic',{year:'numeric', month:'long', day:'numeric'}); }
-  document.getElementById('todayDate').innerHTML="📅 اليوم: "+gDate+" • "+hDate+" هـ";
+  try{hDate=now.toLocaleDateString('ar-SA',{timeZone:'Asia/Riyadh',year:'numeric',month:'long',day:'numeric',calendar:'islamic-umalqura'})}
+  catch(e){hDate=now.toLocaleDateString('ar-SA',{timeZone:'Asia/Riyadh',year:'numeric',month:'long',day:'numeric',calendar:'islamic'})}
+
+  // التاريخ الصحيح اليوم 09/09/2026
+  document.getElementById('todayBox').innerHTML=
+    " اليوم: "+gWeek+"، "+gFull+" م - "+gNum+"<br>"+
+    "🕌 "+hDate+" هـ";
 }
+
 function generate(){
-  let year=parseInt(document.getElementById('yearInput').value)||2026;
-  document.getElementById('mainTitle').innerText="تقويم "+year;
-  document.getElementById('subYear').innerText=year;
-  document.getElementById('footerYear').innerText=year;
-  let tbody=document.getElementById('tableBody'); tbody.innerHTML="";
-  let base=1447+(year-2026);
-  for(let i=0;i<12;i++){
-    let hYear=base+(i>=6?1:0);
-    let tr=document.createElement('tr');
-    tr.innerHTML="<td>"+hYear+" "+hLabels[i]+"</td><td>"+manakh[i]+"</td><td>"+(i+1)+" - "+monthsAr[i]+"</td>";
-    tbody.appendChild(tr);
-  }
-  showToday();
-}
-generate();
-setInterval(showToday, 60000);
-</script>
-</body>
-</html>
+  let y=parseInt(document.getElementById('
