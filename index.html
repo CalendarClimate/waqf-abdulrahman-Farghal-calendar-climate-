@@ -7,40 +7,37 @@
 <style>
 *{box-sizing:border-box}
 body{background:#08140f;margin:0;padding:12px;font-family:Amiri,'Traditional Arabic',serif;display:flex;flex-direction:column;align-items:center}
-.top{background:#fff8e1;border:3px solid #b8964f;border-radius:16px;padding:14px;width:820px;max-width:96vw;text-align:center}
-.top label{display:block;font-weight:bold;color:#5a4010;font-size:16px;margin-bottom:8px}
-.top input{font-size:28px;font-weight:bold;width:170px;text-align:center;padding:10px;border:3px solid #8a6d2a;border-radius:10px;background:#fff;color:#000}
-.btn{background:#0f2a1a;color:#f0d27a;border:2px solid #c9a86a;padding:10px 22px;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer;margin:6px}
-.poster{margin-top:14px;width:820px;max-width:96vw;background:#0e2518;border:10px double #c9a86a;outline:3px solid #7a5d2e;outline-offset:-10px;padding:26px 20px 14px;color:#e8d9a5}
-.aya{text-align:center;font-size:29px;color:#f3d989;line-height:1.7;font-weight:bold}
-.aya small{display:block;font-size:16px;color:#c9b896;margin-top:4px}
-.note{border:1px solid #c9a86a;padding:9px;margin:14px 6px;text-align:center;font-size:10.5px;color:#d1c29a;background:rgba(0,0,0,.35);line-height:1.6}
-.title{text-align:center;font-size:50px;color:#f0d27a;margin:12px 0 2px;font-weight:bold}
-.sub{text-align:center;font-size:10px;color:#a99a7a;letter-spacing:2px;margin-bottom:12px}
-.todayBox{border:2px solid #c9a86a;border-radius:12px;background:linear-gradient(90deg,rgba(201,168,106,.25),rgba(201,168,106,.08));padding:12px;text-align:center;font-size:15px;font-weight:bold;color:#ffe9a0;line-height:1.9;margin-bottom:14px}
+.top{background:#fff8e1;border:3px solid #b8964f;border-radius:16px;padding:14px;width:850px;max-width:96vw;text-align:center}
+.top label{font-weight:bold;color:#5a4010;font-size:18px;display:block;margin-bottom:8px}
+.top input{font-size:30px;font-weight:bold;width:180px;text-align:center;padding:10px;border:3px solid #8a6d2a;border-radius:10px}
+.btn{background:#0f2a1a;color:#f0d27a;border:2px solid #c9a86a;padding:10px 22px;border-radius:8px;font-weight:bold;cursor:pointer;margin:5px}
+.poster{margin-top:14px;width:850px;max-width:96vw;background:#0e2518;border:10px double #c9a86a;outline:3px solid #7a5d2e;outline-offset:-10px;padding:24px 18px;color:#e8d9a5}
+.aya{text-align:center;font-size:28px;color:#f3d989;font-weight:bold}
+.aya small{display:block;font-size:15px;color:#c9b896}
+.note{border:1px solid #c9a86a;padding:8px;margin:12px 0;text-align:center;font-size:10.5px;color:#d1c29a;background:rgba(0,0,0,.3)}
+.title{text-align:center;font-size:50px;color:#f0d27a;margin:10px 0 0;font-weight:bold}
+.sub{text-align:center;font-size:10px;color:#a99a7a;margin-bottom:12px}
+.today{border:2px solid #c9a86a;border-radius:12px;padding:14px;text-align:center;font-weight:bold;line-height:2;background:rgba(201,168,106,.18);color:#fff;font-size:15px;margin-bottom:12px}
 table{width:100%;border-collapse:collapse;border:2px solid #c9a86a;font-size:12.5px}
-th{background:#c9a86a;color:#1a2a12;padding:8px 4px;border:1px solid #7a5d2e}
-td{border:1px solid #5a4a2a;padding:7px 5px;color:#e0d0a0;text-align:center}
+th{background:#c9a86a;color:#1a2a12;padding:9px 4px;border:1px solid #7a5d2e;font-size:13px}
+td{border:1px solid #5a4a2a;padding:8px 5px;text-align:center;color:#e0d0a0}
 tr:nth-child(even) td{background:rgba(0,0,0,.25)}
-.foot{display:flex;justify-content:space-between;margin-top:12px;font-size:9px;color:#8a7d5a}
-@media print{.top{display:none}body{background:#fff;padding:0}.poster{border:none;outline:none;box-shadow:none}}
+@media print{.top{display:none}}
 </style>
 </head>
 <body>
 
 <div class="top">
-  <label for="yearInput">📅 ادخل السنه المطلوبه:</label>
-  <input type="number" id="yearInput" value="2026" min="1900" max="2100" oninput="generate()">
-  <div>
-    <button class="btn" onclick="generate()">عرض</button>
-    <button class="btn" onclick="window.print()">🖨️ طباعة A3</button>
-  </div>
+  <label>📅 ادخل السنه المطلوبه:</label>
+  <input type="number" id="y" value="2026" min="1900" max="2100" oninput="build()">
+  <div><button class="btn" onclick="build()">عرض التقويم</button> <button class="btn" onclick="window.print()">🖨️ طباعة A3</button></div>
 </div>
 
 <div class="poster">
   <div class="aya">يَسْأَلُونَكَ عَنِ الأَهِلَّةِ قُلْ هِيَ مَوَاقِيتُ لِلنَّاسِ وَالْحَجِّ<small>[ البقرة 189 ]</small></div>
-  <div class="note"><b>ملاحظة - رصد هلال المملكة العربية السعودية:</b> يعتمد في استمداد بدايات الأشهر الهجرية فيما يصدر رسمياً من المحكمة العليا على تحري رؤية الهلال</div>
-  <div class="title" id="mainTitle">تقويم 2026</div>
-  <div class="sub">TAQWEEM <span id="subYear">2026</span> • ISLAMIC & GREGORIAN CALENDAR</div>
-  <div id="todayBox" class="todayBox">📅 اليوم: الثلاثاء، 9 سبتمبر 2026 م - 09/09/2026<br>🕌 18 ربيع الأول 1448 هـ - توقيت المدينة المنورة</div>
-  <table><thead><tr><th>التقويم الهجري</th><th>المناخ المتوقع (السعودية)</th><th>الشهر</th></tr></thead><tbody id="bodyTable"></
+  <div class="note"><b>ملاحظة - رصد هلال المملكة العربية السعودية:</b> يعتمد في تحديد بدايات الأشهر الهجرية على ما يصدر رسمياً من المحكمة العليا</div>
+  <div class="title" id="t1">تقويم 2026</div>
+  <div class="sub">TAQWEEM - AUTO HIJRI & GREGORIAN • KSA TIME</div>
+  <div id="today" class="today"></div>
+  <table>
+    <thead><tr><th>
